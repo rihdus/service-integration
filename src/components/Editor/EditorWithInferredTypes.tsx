@@ -1,8 +1,7 @@
 import React from "react"
 import Connect, { ActionsProps } from "../../utils/Connect/Connect"
 
-interface EditorProps
-   extends ActionsProps<typeof actions>{
+interface EditorProps extends ActionsProps<typeof actions> {
    readonly?: boolean
 }
 
@@ -19,7 +18,7 @@ export const Editor: React.FC<EditorProps> = (props) => {
                console.log("onSubmit", formData)
                // TODO: Inject actions
                props.actions?.submitForm({
-                  name: formData.name as string
+                  name: formData.name as string,
                })
             }}
          >
@@ -36,7 +35,7 @@ export const Editor: React.FC<EditorProps> = (props) => {
 
 export const actions = {
    submitForm: (formData: { name: string }) => {
-      console.info('actions.submitForm ... OK', formData);
+      console.info("actions.submitForm ... OK", formData)
       return Promise.resolve()
    },
 }

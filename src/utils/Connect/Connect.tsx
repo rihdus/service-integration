@@ -4,18 +4,17 @@ export interface ActionsProps<Type> {
    actions?: Type
 }
 
-function Connect<ConnectedProps, Props, Actions>(
-   Component: React.FC<Props>,
+function Connect<ConnectedProps, Actions>(
+   Component: React.FC<ConnectedProps>,
    actions: Actions
-): React.FC<Props> {
-   const ConnectedComponent: React.FC<
-      ConnectedProps extends Props ? any : any 
-   > = (originalPprops) => {
-      return <Component {...originalPprops} actions={actions} />
+) {
+   const ConnectedComponent: React.FC<ConnectedProps> = (originalProps) => {
+      return <Component {...originalProps} actions={actions} />
    }
 
-   return ConnectedComponent as React.FC<Props>
+   return ConnectedComponent as React.FC<
+      Omit<ConnectedProps, keyof ActionsProps<any>>
+   >
 }
 
 export default Connect
-
